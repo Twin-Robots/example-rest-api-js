@@ -1,0 +1,26 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build output
+dist
+
+# Version control
+.git
+.gitignore
+
+# Environment variables
+.env
+.env.*
+
+# Development files
+*.log
+.DS_Store
+coverage
+.vscode
+.idea
+
+# Test files
+__tests__
+*.test.ts
+jest.config.js 
