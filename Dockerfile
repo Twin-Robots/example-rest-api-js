@@ -15,6 +15,9 @@ RUN pnpm install --frozen-lockfile
 # Copy source code
 COPY . .
 
+# Generate Prisma Client
+RUN pnpm prisma generate
+
 # Build the application
 RUN pnpm build
 
@@ -34,6 +37,7 @@ RUN pnpm install --prod --frozen-lockfile
 
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
 # Set environment variables
 ENV NODE_ENV=production

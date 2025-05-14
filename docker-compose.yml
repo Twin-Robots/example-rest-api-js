@@ -5,7 +5,9 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DB_URL=jdbc:postgresql://postgres:5434/postgres
+      - DATABASE_URL=postgresql://postgres:password@postgres:5434/postgres
+    depends_on:
+      - postgres
   postgres:
     image: postgres:17-alpine
     ports:

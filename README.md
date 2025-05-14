@@ -1,12 +1,13 @@
 # TypeScript Express REST API
 
-A modern REST API built with Node.js, Express, and TypeScript.
+A modern REST API built with Node.js, Express, TypeScript, and Prisma.
 
 ## Prerequisites
 
 - Node.js (v14 or higher)
 - pnpm (v6 or higher)
 - Docker (optional)
+- PostgreSQL (if running locally)
 
 ## Setup
 
@@ -19,6 +20,12 @@ pnpm install
 ```
 PORT=3000
 NODE_ENV=development
+DATABASE_URL="postgresql://postgres:password@localhost:5434/postgres"
+```
+
+3. Run database migrations:
+```bash
+pnpm prisma migrate dev
 ```
 
 ## Development
@@ -59,6 +66,11 @@ For development with hot-reload:
 docker run -p 3000:3000 -v $(pwd):/app typescript-express-api pnpm dev
 ```
 
+Or use Docker Compose:
+```bash
+docker-compose up
+```
+
 ## Testing
 
 Run the test suite:
@@ -86,7 +98,15 @@ pnpm test:coverage
 - `pnpm test` - Run tests
 - `pnpm test:watch` - Run tests in watch mode
 - `pnpm test:coverage` - Generate test coverage report
+- `pnpm prisma generate` - Generate Prisma Client
+- `pnpm prisma migrate dev` - Create and apply database migrations
+- `pnpm prisma studio` - Open Prisma Studio to view/edit data
 
 ## API Endpoints
 
-- `GET /` - Welcome message
+### Users
+- `GET /api/users` - List all users
+- `POST /api/users` - Create a new user
+- `GET /api/users/:id` - Get a user by ID
+- `PUT /api/users/:id` - Update a user
+- `DELETE /api/users/:id` - Delete a user
