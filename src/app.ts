@@ -19,8 +19,8 @@ app.get('/hello-world', (req: Request, res: Response) => {
   res.json({ message: 'Hello World' });
 });
 
-app.get('/posts/:id', async (req: Request, res: Response) => {
-  const post = await postService.getPost(req.params.id);
+app.get('/posts/:slug', async (req: Request, res: Response) => {
+  const post = await postService.getPost(req.params.slug);
   res.json(post);
 });
 

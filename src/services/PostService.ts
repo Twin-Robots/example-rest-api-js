@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 export interface Post {
-  id: string;
+  slug: string;
   communityId: number;
   title: string;
   content: string;
@@ -24,7 +24,7 @@ export class PostService {
   async createPost(post: CreatePost): Promise<Post> {
     const newPost = await this.prisma.post.create({
       data: {
-        externalId: this.postIdFromTitle(post.title),
+        externalId: this.postSlugFromTitle(post.title),
         communityId: post.communityId,
         title: post.title,
         content: post.content,
@@ -32,29 +32,29 @@ export class PostService {
     });
 
     return {
-      id: newPost.externalId,
+      slug: newPost.slug,
       communityId: newPost.communityId,
       title: newPost.title,
       content: newPost.content,
     };
   }
 
-  async getPost(id: string): Promise<Post | null> {
+  async getPost(slug: string): Promise<Post | null> {
     return await this.prisma.post.findUnique({
       where: {
-        externalId: id,
+        slug: slug,
       },
     });
   }
 
-  postIdFromTitle(title: string) {
-    var newTitle = title.toLowerCase().replace(/[^a-z0-9 ]+/g, '').replace(/^-+|-+$/g, '').replace(/[ ]/g, '_');
+  postSlugFromTitle(title: string) {
+    var slug = title.toLowerCase().replace(/[^a-z0-9 ]+/g, '').replace(/^-+|-+$/g, '').replace(/[ ]/g, '_');
 
-    newTitle = newTitle.substring(0, 23);
+    slug = slug.substring(0, 23);
 
     var timestamp = Date.now().toString();
-    newTitle = newTitle + timestamp.substring(timestamp.length - 8);
+    slug = slug + timestamp.substring(timestamp.length - 8);
 
-    return newTitle;
+    return slug;
   }
 }
