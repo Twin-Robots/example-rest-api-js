@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from '../app';
 
 describe('App', () => {
-  describe('GET /', () => {
+  describe('GET /hello-world', () => {
     it('should return welcome message', async () => {
       const response = await request(app).get('/hello-world');
       
