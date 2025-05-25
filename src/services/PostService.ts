@@ -24,7 +24,7 @@ export class PostService {
   async createPost(post: CreatePost): Promise<Post> {
     const newPost = await this.prisma.post.create({
       data: {
-        externalId: this.postSlugFromTitle(post.title),
+        slug: this.postSlugFromTitle(post.title),
         communityId: post.communityId,
         title: post.title,
         content: post.content,
