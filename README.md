@@ -103,10 +103,3 @@ pnpm test:coverage
 - `pnpm prisma studio` - Open Prisma Studio to view/edit data
 
 ## API Endpoints
-
-### Users
-- `GET /api/users` - List all users
-- `POST /api/users` - Create a new user
-- `GET /api/users/:id` - Get a user by ID
-- `PUT /api/users/:id` - Update a user
-- `DELETE /api/users/:id` - Delete a user
